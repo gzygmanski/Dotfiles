@@ -1,0 +1,15 @@
+rofi.width: -500
+rofi.color-window: argb:55f1f101, #002b36, #000000
+rofi.color-normal: #010101, #eeeeee, #060606, #e2260b, #eee8d5
+rofi.color-active: #d64937, #fff5ce, #c93e2c, #f34e05, #fdf6e3
+rofi.color-urgent: #000000, #ff9a00, #010101, #ff2700, #fdf6e3
+rofi.font: Ubuntu Mono 15
+rofi.separator-style: none
+rofi.bw: 0
+rofi.line-margin: 0
+rofi.padding: 300
+rofi.line-padding: 10
+rofi.terminal: urxvtc
+rofi.hide-scrollbar: true
+rofi.fuzzy: true
+rofi.fullscreen: true

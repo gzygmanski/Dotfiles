@@ -1,0 +1,22 @@
+rofi.location:		0
+#rofi.yoffset:		22
+rofi.width:		440	
+
+rofi.color-enabled:	true
+#State			bg		fg		bgalt		hlbg		hlfg
+rofi.color-window:	#f00f0f0f,	#00000000
+rofi.color-normal:	#00000000,	#ffcccccc,	#00000000,	#22ffffff,	#ffffff
+rofi.color-active:	#00000000,	#ffcccccc,	#00000000,	#22ffffff,	#ffffff
+rofi.color-urgent:	#00000000,	#ffcccccc,	#00000000,	#22ffffff,	#ffffff
+
+rofi.font:		xft:Noto Sans, Senobi Gothic Bold, Font Awesome 10
+rofi.separator-style:	none
+rofi.bw:		0
+rofi.line-margin:	0	
+rofi.padding:		0
+rofi.line-padding:	10
+rofi.terminal:		urxvt
+rofi.hide-scrollbar:	true
+rofi.fuzzy:		true
+rofi.fullscreen:	false
+rofi.lines:		5

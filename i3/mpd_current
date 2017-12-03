@@ -1,0 +1,20 @@
+#!/bin/bash
+
+HOST=127.0.0.1
+PORT=6666
+
+${VOLUME=`mpc --host=$HOST --port=$PORT volume`}
+${CURRENT=`mpc --host=$HOST --port=$PORT current --format="[%artist% - ][%title%]"`}
+${TIME_LN=`mpc --host=$HOST --port=$PORT status | grep playing`}
+
+IFS=', ' read -a time <<< $TIME_LN 
+
+if  [$CURRENT -eq '']
+then
+	echo "MPD  STOPPED    ${VOLUME:7} "
+elif [${time[2]} -eq '']
+then
+	echo "$CURRENT  PAUSED    ${VOLUME:7} "
+else
+	echo "$CURRENT  ${time[2]}    ${VOLUME:7} "
+fi
