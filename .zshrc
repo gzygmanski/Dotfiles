@@ -107,3 +107,5 @@ esac
 alias r='ranger'
 alias update='sudo apt-get update'
 alias upgrade='sudo apt-get upgrade'
+alias pdf='pdflatex'
+alias ss='scrot ~/Obrazy/Screenshots/_SEL_screenshots/%Y-%m-%d-%s.png -s -q 100'

@@ -25,8 +25,8 @@ set $urxvt_fg white
 # color vars
 set $bg-color	         #020202
 set $inactive-bg-color   #020202
-set $text-color          #efefdf
-set $inactive-text-color #a2a2a2
+set $text-color          #3fe3fe
+set $inactive-text-color #efefdf
 set $urgent-bg-color     #dc322f
 
 set $inactive-border	#0f0f0f
@@ -141,11 +141,9 @@ assign [class="Chromium-browser"] $workspace1
 assign [class="Firefox"] $workspace1
 assign [class="URxvt"] $workspace_term
 assign [class="Gedit"] $workspace2
-assign [class="Atom"] $workspace2
 assign [class="steam"] $workspace3
 assign [class="Steam"] $workspace3
-assign [class="^Steam$" title="^Steam -Self Udater$"] $workspace3
-
+assign [class="^Steam$" title="^Steam -Self Updater$"] $workspace3
 
 # https://github.com/ValveSoftware/steam-for-linux/issues/1040
 for_window [class="^Steam$" title="^Friends$"] floating enable
@@ -158,6 +156,8 @@ for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
 for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
 for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
 for_window [title="^Steam Keyboard$"] floating enable
+
+for_window [title="^ncmpcpp$"] floating enable; workspace $workspace_term
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -215,10 +215,10 @@ bar {
 	colors {
 		background $bg-color
 		separator #fff
-		#                  border             background         text
-		focused_workspace  $bg-color          $bg-color          $text-color
-		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+		#                  border		background      	text
+		focused_workspace  $bg-color		$bg-color		$text-color
+		inactive_workspace $inactive-bg-color	$inactive-bg-color 	$inactive-text-color
+		urgent_workspace   $urgent-bg-color	$urgent-bg-color   	$text-color
 	}
 }
 
@@ -227,6 +227,8 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% #i
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5% #decrease sound volume
 
 # Media player controls
+bindsym $mod+0 exec urxvt +sb -depth 32 -bg $urxvt_bg -fg urxvt_fg -fn $urxvt_fn -e ncmpcpp
+
 bindsym XF86AudioPlay exec mpc -h 127.0.0.1 -p 6666 toggle
 bindsym XF86AudioStop exec mpc -h 127.0.0.1 -p 6666 stop
 bindsym XF86AudioNext exec mpc -h 127.0.0.1 -p 6666 next
@@ -238,17 +240,24 @@ bindsym $mod+Shift+minus exec mpc -h 127.0.0.1 -p 6666 volume -5
 bindsym $mod+Shift+greater exec mpc -h 127.0.0.1 -p 6666 seek +2%
 bindsym $mod+Shift+less exec mpc -h 127.0.0.1 -p 6666 seek -2%
 
-# Custom
+# Shutdown/Lockdown
 # bindsym $mod+Shift+x exec i3lock --color=060606
 bindsym $mod+x exec --no-startup-id ~/.config/i3/lock.sh
-bindsym $mod+Shift+p exec shutdown -h now
-bindsym Print exec scrot '/home/shiss/Obrazy/Screenshots/%Y-%m-%d-%s.png' -q 100 
-bindsym $mod+0 exec urxvt +sb -depth 32 -bg $urxvt_bg -fg urxvt_fg -fn $urxvt_fn -e ncmpcpp
+bindsym $mod+Shift+p exec mpc -h 127.0.0.1 -p 6666 stop; shutdown -h now
 
+# Print Screen
+bindsym Print exec scrot ~/Obrazy/Screenshots/_FSC_screenshots/%Y-%m-%d-%s.png -q 100
+bindsym $mod+Shift+u exec scrot ~/Obrazy/Screenshots/_FCW_screenshots/%Y-%m-%d-%s.png -u -q 100
+
+# Graphics
 exec --no-startup-id nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceCompositionPipeline = On }"
 exec --no-startup-id compton -f
 exec_always --no-startup-id feh --bg-scale /home/shiss/Obrazy/wallpaper.png
-exec --no-startup-id autocutsel -selection PRIMARY
 
+# Copying
+exec_always --no-startup-id autocutsel -selection PRIMARY
+exec_always --no-startup-id autocutsel -selection CLIPBOARD
+
+# Applications
 exec --no-startup-id mpd
-exec steam
+exec --no-startup-id steam
