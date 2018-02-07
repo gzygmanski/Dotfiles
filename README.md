@@ -2,7 +2,7 @@
 
 ![Screen](https://i.imgur.com/0y6jCrS.jpg)
 
-##i3wm + gaps
+## i3wm + gaps
   * Gtk theme: Adapta
   * Icon Pack: Papirus
   * Fonts: Senobi Gothic, Hack, Noto Sans, FontAwesome
@@ -10,7 +10,13 @@
   * Dmenu & program switcher: Rofi
   * Terminal: Urxvt
 
-##Program used:
+## Program used:
   * Console applications: ranger, scrot, autocutsel, vim
-  * mpd clients: ncmpcpp, mpc 
+  * Mpd clients: ncmpcpp, mpc
+  * Audio controls: pactl
+  * Fadein/out: compton
+  * Image viewer/wallpaper: feh
+  * PDF & LaTeX: Zathura, Tex Live, vim-latex-live-preview
 
+## User manual:
+   Mod + F1

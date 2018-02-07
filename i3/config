@@ -263,5 +263,6 @@ exec_always --no-startup-id autocutsel -selection CLIPBOARD
 exec mpd
 exec steam
 
-#i3 config
+#i3 config & manual
 bindsym $mod+Shift+Return exec urxvt +sb -depth 32 -fn $urxvt_fn -e vim ~/.config/i3/config
+bindsym $mod+F1 exec zathura ~/.config/i3/userManual.pdf
