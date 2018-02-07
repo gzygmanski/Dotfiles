@@ -18,5 +18,7 @@
   * Image viewer/wallpaper: feh
   * PDF & LaTeX: Zathura, Tex Live, vim-latex-live-preview
 
+![Screen2](https://i.imgur.com/90hx1vR.jpg)
+
 ## User manual:
    Mod + F1
