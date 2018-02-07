@@ -17,14 +17,13 @@ bindsym $mod+Shift+x gaps inner all set $gaps_inner, gaps outer all set $gaps_ou
 bindsym $mod+bracketright gaps inner all plus $gaps_inner_change; gaps outer all plus $gaps_outer_change 
 bindsym $mod+bracketleft gaps inner all minus $gaps_inner_change; gaps outer all minus $gaps_outer_change 
 
-set $urxvt_fn "xft:Hack:pixelsize=14"
-set $urxvt_bg rgba:0f0f/0f0f/0f0f/f0f0
-set $urxvt_fg white
-
+set $urxvt_fn "xft:Hack:pixelsize=10"
+# set $urxvt_bg rgba:0000/0000/0000/0000
+# set $urxvt_fg white
 
 # color vars
-set $bg-color	         #020202
-set $inactive-bg-color   #020202
+set $bg-color	         #111111
+set $inactive-bg-color   #111111
 set $text-color          #3fe3fe
 set $inactive-text-color #efefdf
 set $urgent-bg-color     #dc322f
@@ -33,16 +32,16 @@ set $inactive-border	#0f0f0f
 set $active-border	#3fe3fe
 
 # workspace vars
-set $workspace_term	"0: "
-set $workspace1		"1: "
-set $workspace2		"2: "
-set $workspace3		"3: "
-set $workspace4		"4: "
-set $workspace5		"5: "
-set $workspace6		"6: "
-set $workspace7		"7: "
-set $workspace8		"8: "
-set $workspace9		"9: "
+set $workspace0		"0: Terminal"
+set $workspace1		"1: Browser"
+set $workspace2		"2: Editor"
+set $workspace3		"3: Steam"
+set $workspace4		"4: [4]"
+set $workspace5		"5: [5]"
+set $workspace6		"6: [6]"
+set $workspace7		"7: [7]"
+set $workspace8		"8: [8]"
+set $workspace9		"9: Music"
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -52,7 +51,7 @@ font xft:Senobi Gothic Medium, Font Awesome 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id urxvt +sb -depth 32 -bg $urxvt_bg -fg $urxvt_fg -fn $urxvt_fn
+bindsym $mod+Return exec --no-startup-id urxvt +sb -depth 32 -fn $urxvt_fn
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -113,7 +112,7 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+grave workspace $workspace_term
+bindsym $mod+grave workspace $workspace0
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
 bindsym $mod+3 workspace $workspace3
@@ -125,7 +124,7 @@ bindsym $mod+8 workspace $workspace8
 bindsym $mod+9 workspace $workspace9
 
 # move focused container to workspace
-bindsym $mod+Shift+grave move container to workspace $workspace_term
+bindsym $mod+Shift+grave move container to workspace $workspace0
 bindsym $mod+Shift+1 move container to workspace $workspace1
 bindsym $mod+Shift+2 move container to workspace $workspace2
 bindsym $mod+Shift+3 move container to workspace $workspace3
@@ -139,8 +138,9 @@ bindsym $mod+Shift+9 move container to workspace $workspace9
 # workspace assign
 assign [class="Chromium-browser"] $workspace1
 assign [class="Firefox"] $workspace1
-assign [class="URxvt"] $workspace_term
+assign [class="URxvt"] $workspace0 
 assign [class="Gedit"] $workspace2
+assign [class="libreoffice"] $workspace2
 assign [class="steam"] $workspace3
 assign [class="Steam"] $workspace3
 assign [class="^Steam$" title="^Steam -Self Updater$"] $workspace3
@@ -157,7 +157,7 @@ for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
 for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
 for_window [title="^Steam Keyboard$"] floating enable
 
-for_window [title="^ncmpcpp$"] floating enable; workspace $workspace_term
+for_window [title="^ncmpcpp$"] move container to workspace $workspace9, workspace $workspace9
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -209,25 +209,26 @@ client.urgent           $urgent-bg-color	$urgent-bg-color   $text-color         
 bar {
 	status_command i3blocks -c /home/shiss/.config/i3/i3blocks.conf
 	#status_command polybar -c /home/shiss/.config/polybar/config example &
-	font xft: Senobi Gothic Medium, Font Awesome 8 
+	font xft: Senobi Gothic Bold, Font Awesome 8 
 	position top
 	tray_output none
+	strip_workspace_numbers yes
 	colors {
 		background $bg-color
 		separator #fff
 		#                  border		background      	text
 		focused_workspace  $bg-color		$bg-color		$text-color
 		inactive_workspace $inactive-bg-color	$inactive-bg-color 	$inactive-text-color
-		urgent_workspace   $urgent-bg-color	$urgent-bg-color   	$text-color
+		urgent_workspace   $bg-color		$bg-color   		$urgent-bg-color
 	}
 }
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5% #decrease sound volume
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 1 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 1 -5% #decrease sound volume
 
 # Media player controls
-bindsym $mod+0 exec urxvt +sb -depth 32 -bg $urxvt_bg -fg urxvt_fg -fn $urxvt_fn -e ncmpcpp
+bindsym $mod+0 exec urxvt +sb -depth 32 -fn $urxvt_fn -e ncmpcpp
 
 bindsym XF86AudioPlay exec mpc -h 127.0.0.1 -p 6666 toggle
 bindsym XF86AudioStop exec mpc -h 127.0.0.1 -p 6666 stop
@@ -242,8 +243,8 @@ bindsym $mod+Shift+less exec mpc -h 127.0.0.1 -p 6666 seek -2%
 
 # Shutdown/Lockdown
 # bindsym $mod+Shift+x exec i3lock --color=060606
-bindsym $mod+x exec --no-startup-id ~/.config/i3/lock.sh
-bindsym $mod+Shift+p exec mpc -h 127.0.0.1 -p 6666 stop; shutdown -h now
+bindsym $mod+x exec ~/.config/i3/lock.sh
+bindsym $mod+Shift+p exec shutdown -h now
 
 # Print Screen
 bindsym Print exec scrot ~/Obrazy/Screenshots/_FSC_screenshots/%Y-%m-%d-%s.png -q 100
@@ -251,13 +252,16 @@ bindsym $mod+Shift+u exec scrot ~/Obrazy/Screenshots/_FCW_screenshots/%Y-%m-%d-%
 
 # Graphics
 exec --no-startup-id nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceCompositionPipeline = On }"
-exec --no-startup-id compton -f
-exec_always --no-startup-id feh --bg-scale /home/shiss/Obrazy/wallpaper.png
+# exec --no-startup-id compton -f
+exec_always --no-startup-id feh --bg-scale /home/shiss/Obrazy/wallpaper.jpg
 
 # Copying
 exec_always --no-startup-id autocutsel -selection PRIMARY
 exec_always --no-startup-id autocutsel -selection CLIPBOARD
 
 # Applications
-exec --no-startup-id mpd
-exec --no-startup-id steam
+exec mpd
+exec steam
+
+#i3 config
+bindsym $mod+Shift+Return exec urxvt +sb -depth 32 -fn $urxvt_fn -e vim ~/.config/i3/config

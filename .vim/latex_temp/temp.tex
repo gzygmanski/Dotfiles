@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage[subpreambles=false]{standalone}
+
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+
+\usepackage[margin=4cm]{geometry}
+
+\usepackage{cellspace}
+
+\cellspacetoplimit 5pt
+\cellspacebottomlimit 5pt
+
+\usepackage{import}
+
+
+# -------------------------------
+#        CUSTOM PACKAGES	|
+# -------------------------------
+\usepackage{}
+# -------------------------------
+
+# -------------------------------
+#             TITLE             |
+# -------------------------------
+\title{}
+\date{}
+\author{}
+# -------------------------------
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\pagebreak
+
+\import{sections/}{}
+
+\end{document}

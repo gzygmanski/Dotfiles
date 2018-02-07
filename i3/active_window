@@ -6,4 +6,18 @@ WINDOW_INFO=`xprop -id $ACTIVE_WINDOW_ID |
 	grep WM_NAME\(UTF8_STRING\) | 
 	awk -F"= " '{print $2}'`
 
-echo ${WINDOW_INFO:1:-1}
+chrLen=${#WINDOW_INFO}
+maxLen=30
+
+if [ -n "$WINDOW_INFO" ]
+then
+	if [ $(( $chrLen )) -lt $(( $maxLen )) ]
+	then
+		echo "${WINDOW_INFO:1:-1}"
+	else
+		cutChr=$(( $maxLen-$chrLen ))
+		echo "${WINDOW_INFO:1:$cutChr}..."
+	fi
+else
+	echo Nothing
+fi

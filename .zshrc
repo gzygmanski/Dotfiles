@@ -8,7 +8,8 @@
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME=steeef
-ZSH_THEME=ys
+ZSH_THEME=af-magic
+# af-magic theme
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
 # cause zsh load theme from this variable instead of
@@ -96,16 +97,10 @@ source $ZSH/oh-my-zsh.sh
 
 export EDITOR=vim
 
-# urxvt title
-case $TERM in
-	rxvt*)
-		trap 'echo -ne "\e]0;$USER@$HOSTNAME: $BASH_COMMAND\007"' DEBUG
-;;
-esac
-
 #My aliases
 alias r='ranger'
 alias update='sudo apt-get update'
 alias upgrade='sudo apt-get upgrade'
-alias pdf='pdflatex'
+alias install='sudo apt-get install'
+alias pdf='zathura'
 alias ss='scrot ~/Obrazy/Screenshots/_SEL_screenshots/%Y-%m-%d-%s.png -s -q 100'

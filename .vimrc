@@ -4,9 +4,7 @@ filetype plugin indent on
 set number
 set backspace=indent,eol,start
 
-" colorscheme harlequin  
-colorscheme badwolf
-let g:badwolf_darkgutter = 1
+colorscheme vividchalk 
 
 if has("autocmd")
 	augroup templates
@@ -34,10 +32,10 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'flazz/vim-colorschemes'
+Plugin 'nanotech/jellybeans'
 
 " Plugin 'ying17zi/vim-live-latex-preview'
 Plugin 'xuhdev/vim-latex-live-preview'
-Plugin 'lervag/vimtex'
 
 call vundle#end()            " required
 filetype plugin indent on    " required 
