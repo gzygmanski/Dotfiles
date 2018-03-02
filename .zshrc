@@ -104,3 +104,5 @@ alias upgrade='sudo apt-get upgrade'
 alias install='sudo apt-get install'
 alias pdf='zathura'
 alias ss='scrot ~/Obrazy/Screenshots/_SEL_screenshots/%Y-%m-%d-%s.png -s -q 100'
+alias yt='mpsyt'
+
