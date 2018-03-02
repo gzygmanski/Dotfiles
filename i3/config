@@ -1,6 +1,6 @@
 set $mod Mod4
 
-for_window [class="^.*"] border pixel 2 
+for_window [class="^.*"] border pixel 4
 for_window [class="Firefox"] border pixel 0
 
 set $gaps_inner 20
@@ -17,7 +17,8 @@ bindsym $mod+Shift+x gaps inner all set $gaps_inner, gaps outer all set $gaps_ou
 bindsym $mod+bracketright gaps inner all plus $gaps_inner_change; gaps outer all plus $gaps_outer_change 
 bindsym $mod+bracketleft gaps inner all minus $gaps_inner_change; gaps outer all minus $gaps_outer_change 
 
-set $urxvt_fn "xft:Hack:pixelsize=10"
+# set $urxvt_fn "xft:Cousine for powerline:pixelsize=12"
+set $urxvt_fn "xft:Monaco:pixelsize=12"
 # set $urxvt_bg rgba:0000/0000/0000/0000
 # set $urxvt_fg white
 
@@ -144,6 +145,7 @@ assign [class="libreoffice"] $workspace2
 assign [class="steam"] $workspace3
 assign [class="Steam"] $workspace3
 assign [class="^Steam$" title="^Steam -Self Updater$"] $workspace3
+assign [class="mpv"] $workspace0
 
 # https://github.com/ValveSoftware/steam-for-linux/issues/1040
 for_window [class="^Steam$" title="^Friends$"] floating enable
@@ -157,6 +159,9 @@ for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
 for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
 for_window [title="^Steam Keyboard$"] floating enable
 
+no_focus [class="mpv"]
+
+for_window [class="mpv"] floating enable, resize set 313 180, move absolute position 1605 px 24 px
 for_window [title="^ncmpcpp$"] move container to workspace $workspace9, workspace $workspace9
 
 # reload the configuration file
