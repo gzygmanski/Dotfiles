@@ -1,7 +1,13 @@
 set $mod Mod4
 
+workspace_auto_back_and_forth yes
+
 for_window [class="^.*"] border pixel 4
+# [class="^.*"]
 for_window [class="Firefox"] border pixel 0
+
+floating_maximum_size 1920 x 1058
+floating_minimum_size 313 x 180
 
 set $gaps_inner 20
 set $gaps_outer 5
@@ -113,16 +119,16 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+grave workspace $workspace0
-bindsym $mod+1 workspace $workspace1
-bindsym $mod+2 workspace $workspace2
-bindsym $mod+3 workspace $workspace3
-bindsym $mod+4 workspace $workspace4
-bindsym $mod+5 workspace $workspace5
-bindsym $mod+6 workspace $workspace6
-bindsym $mod+7 workspace $workspace7
-bindsym $mod+8 workspace $workspace8
-bindsym $mod+9 workspace $workspace9
+bindsym $mod+grave [con_mark="pip[0-3]"] move container to workspace $workspace0; workspace $workspace0; focus tiling
+bindsym $mod+1 [con_mark="pip[0-3]"] move container to workspace $workspace1; workspace $workspace1; focus tiling
+bindsym $mod+2 [con_mark="pip[0-3]"] move container to workspace $workspace2; workspace $workspace2; focus tiling
+bindsym $mod+3 [con_mark="pip[0-3]"] move container to workspace $workspace3; workspace $workspace3; focus tiling
+bindsym $mod+4 [con_mark="pip[0-3]"] move container to workspace $workspace4; workspace $workspace4; focus tiling
+bindsym $mod+5 [con_mark="pip[0-3]"] move container to workspace $workspace5; workspace $workspace5; focus tiling
+bindsym $mod+6 [con_mark="pip[0-3]"] move container to workspace $workspace6; workspace $workspace6; focus tiling
+bindsym $mod+7 [con_mark="pip[0-3]"] move container to workspace $workspace7; workspace $workspace7; focus tiling
+bindsym $mod+8 [con_mark="pip[0-3]"] move container to workspace $workspace8; workspace $workspace8; focus tiling
+bindsym $mod+9 [con_mark="pip[0-3]"] move container to workspace $workspace9; workspace $workspace9; focus tiling
 
 # move focused container to workspace
 bindsym $mod+Shift+grave move container to workspace $workspace0
@@ -145,7 +151,6 @@ assign [class="libreoffice"] $workspace2
 assign [class="steam"] $workspace3
 assign [class="Steam"] $workspace3
 assign [class="^Steam$" title="^Steam -Self Updater$"] $workspace3
-assign [class="mpv"] $workspace0
 
 # https://github.com/ValveSoftware/steam-for-linux/issues/1040
 for_window [class="^Steam$" title="^Friends$"] floating enable
@@ -158,11 +163,26 @@ for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
 for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
 for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
 for_window [title="^Steam Keyboard$"] floating enable
-
-no_focus [class="mpv"]
-
-for_window [class="mpv"] floating enable, resize set 313 180, move absolute position 1605 px 24 px
 for_window [title="^ncmpcpp$"] move container to workspace $workspace9, workspace $workspace9
+
+no_focus [con_mark="pip[0-3]"]
+for_window [con_mark="pip[0-3]"] resize set 328 188, move absolute position 1588 px 26 px, focus tiling
+for_window [class="mpv"] mark pip0, floating enable, resize set 328 188, move absolute position 1588 px 26 px
+
+# Pip0 controls
+bindsym $mod+apostrophe [con_mark="pip[0-3]"] floating enable, resize set 328 188, move absolute position 1588 px 26 px, focus tiling
+bindsym $mod+slash [con_mark="pip[0-3]"] floating enable, resize set 328 188, move absolute position 1588 px 888 px, focus tiling
+bindsym $mod+Shift+question [con_mark="pip[0-3]"] focus, floating toggle, resize set 328 188, move absolute position 1588 px 26 px
+bindsym $mod+Shift+quotedbl [con_mark="pip[0-3]"] focus, floating enable, resize set 1288 728, move absolute position center
+
+# Pip mode
+#bindsym $mod+apostrophe  mark --replace --toggle pip1, floating enable, resize set 313 180, move absolute position 1595 px 26 px, border normal 0
+#bindsym $mod+slash mark --replace --toggle pip2, floating enable, resize set 313 180, move absolute position 1595 px 218 px, border normal 0
+#bindsym $mod+Shift+question unmark, floating disable
+
+
+
+
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -202,7 +222,7 @@ bindsym $mod+r mode "resize"
 
 # window colors
 #	                border			background         text                 indicator
-client.focused		$active-border		$active-border     $text-color          $active-border
+client.focused		$active-border		$active-border     $bg-color          $active-border
 client.unfocused        $inactive-border	$inactive-border   $inactive-text-color $inactive-border
 client.focused_inactive $inactive-border	$inactive-border   $inactive-text-color $inactive-border
 client.urgent           $urgent-bg-color	$urgent-bg-color   $text-color          #00ff00
@@ -234,6 +254,7 @@ bindsym XF86AudioLowerVolume exec pactl set-sink-volume 1 -5% #decrease sound vo
 
 # Media player controls
 bindsym $mod+0 exec urxvt +sb -depth 32 -fn $urxvt_fn -e ncmpcpp
+
 
 bindsym XF86AudioPlay exec mpc -h 127.0.0.1 -p 6666 toggle
 bindsym XF86AudioStop exec mpc -h 127.0.0.1 -p 6666 stop
