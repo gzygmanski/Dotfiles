@@ -50,6 +50,16 @@ set $workspace7		"7: [7]"
 set $workspace8		"8: [8]"
 set $workspace9		"9: Music"
 
+# pip vars
+set $pip_mark "pip[0-3]"
+set $pip_width_small 328
+set $pip_height_small 188
+set $pip_width_big 1288
+set $pip_height_big 728
+set $pip_pos_x 1588
+set $pip_pos_y_1 26
+set $pip_pos_y_2 888
+
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 font xft:Senobi Gothic Medium, Font Awesome 8
@@ -119,16 +129,16 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+grave [con_mark="pip[0-3]"] move container to workspace $workspace0; workspace $workspace0; focus tiling
-bindsym $mod+1 [con_mark="pip[0-3]"] move container to workspace $workspace1; workspace $workspace1; focus tiling
-bindsym $mod+2 [con_mark="pip[0-3]"] move container to workspace $workspace2; workspace $workspace2; focus tiling
-bindsym $mod+3 [con_mark="pip[0-3]"] move container to workspace $workspace3; workspace $workspace3; focus tiling
-bindsym $mod+4 [con_mark="pip[0-3]"] move container to workspace $workspace4; workspace $workspace4; focus tiling
-bindsym $mod+5 [con_mark="pip[0-3]"] move container to workspace $workspace5; workspace $workspace5; focus tiling
-bindsym $mod+6 [con_mark="pip[0-3]"] move container to workspace $workspace6; workspace $workspace6; focus tiling
-bindsym $mod+7 [con_mark="pip[0-3]"] move container to workspace $workspace7; workspace $workspace7; focus tiling
-bindsym $mod+8 [con_mark="pip[0-3]"] move container to workspace $workspace8; workspace $workspace8; focus tiling
-bindsym $mod+9 [con_mark="pip[0-3]"] move container to workspace $workspace9; workspace $workspace9; focus tiling
+bindsym $mod+grave [con_mark=$pip_mark] move container to workspace $workspace0; workspace $workspace0; focus tiling
+bindsym $mod+1 [con_mark=$pip_mark] move container to workspace $workspace1; workspace $workspace1; focus tiling
+bindsym $mod+2 [con_mark=$pip_mark] move container to workspace $workspace2; workspace $workspace2; focus tiling
+bindsym $mod+3 [con_mark=$pip_mark] move container to workspace $workspace3; workspace $workspace3; focus tiling
+bindsym $mod+4 [con_mark=$pip_mark] move container to workspace $workspace4; workspace $workspace4; focus tiling
+bindsym $mod+5 [con_mark=$pip_mark] move container to workspace $workspace5; workspace $workspace5; focus tiling
+bindsym $mod+6 [con_mark=$pip_mark] move container to workspace $workspace6; workspace $workspace6; focus tiling
+bindsym $mod+7 [con_mark=$pip_mark] move container to workspace $workspace7; workspace $workspace7; focus tiling
+bindsym $mod+8 [con_mark=$pip_mark] move container to workspace $workspace8; workspace $workspace8; focus tiling
+bindsym $mod+9 [con_mark=$pip_mark] move container to workspace $workspace9; workspace $workspace9; focus tiling
 
 # move focused container to workspace
 bindsym $mod+Shift+grave move container to workspace $workspace0
@@ -165,15 +175,15 @@ for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Require
 for_window [title="^Steam Keyboard$"] floating enable
 for_window [title="^ncmpcpp$"] move container to workspace $workspace9, workspace $workspace9
 
-no_focus [con_mark="pip[0-3]"]
-for_window [con_mark="pip[0-3]"] resize set 328 188, move absolute position 1588 px 26 px, focus tiling
-for_window [class="mpv"] mark pip0, floating enable, resize set 328 188, move absolute position 1588 px 26 px
+no_focus [con_mark=$pip_mark]
+for_window [con_mark=$pip_mark] resize set $pip_width_small $pip_height_small, move absolute position $pip_pos_x px $pip_pos_y_1 px, focus tiling
+for_window [class="mpv"] mark pip0, floating enable, resize set $pip_width_small $pip_height_small, move absolute position $pip_pos_x px $pip_pos_y_1 px
 
 # Pip0 controls
-bindsym $mod+apostrophe [con_mark="pip[0-3]"] floating enable, resize set 328 188, move absolute position 1588 px 26 px, focus tiling
-bindsym $mod+slash [con_mark="pip[0-3]"] floating enable, resize set 328 188, move absolute position 1588 px 888 px, focus tiling
-bindsym $mod+Shift+question [con_mark="pip[0-3]"] focus, floating toggle, resize set 328 188, move absolute position 1588 px 26 px
-bindsym $mod+Shift+quotedbl [con_mark="pip[0-3]"] focus, floating enable, resize set 1288 728, move absolute position center
+bindsym $mod+apostrophe [con_mark=$pip_mark] floating enable, resize set $pip_width_small $pip_height_small, move absolute position $pip_pos_x px $pip_pos_y_1 px, focus tiling
+bindsym $mod+slash [con_mark=$pip_mark] floating enable, resize set $pip_width_small $pip_height_small, move absolute position $pip_pos_x px $pip_pos_y_2 px, focus tiling
+bindsym $mod+Shift+question [con_mark=$pip_mark] focus, floating toggle, resize set $pip_width_small $pip_height_small, move absolute position $pip_pos_x px $pip_pos_y_1 px
+bindsym $mod+Shift+quotedbl [con_mark=$pip_mark] focus, floating enable, resize set $pip_width_big $pip_height_big, move absolute position center
 
 # Pip mode
 #bindsym $mod+apostrophe  mark --replace --toggle pip1, floating enable, resize set 313 180, move absolute position 1595 px 26 px, border normal 0
