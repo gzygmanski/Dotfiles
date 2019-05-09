@@ -30,12 +30,12 @@ CURRENT_TITLE=$(checklen "$CURRENT_TITLE" 30)
 
 if  [ -z "$CURRENT_ARTIST" ]&&[ -z "$CURRENT_TITLE" ]
 then
-	echo "MPD  STOPPED    ${VOLUME:7} "
+	echo "MPD      STOPPED       ${VOLUME:7}"
 elif [ "${time[2]}" = '' ]
 then
-	echo "$CURRENT_ARTIST - $CURRENT_TITLE  PAUSED    ${VOLUME:7} "
+	echo "$CURRENT_ARTIST - $CURRENT_TITLE      PAUSED       ${VOLUME:7}"
 else
-	echo "$CURRENT_ARTIST - $CURRENT_TITLE  ${time[2]}    ${VOLUME:7} "
+	echo "$CURRENT_ARTIST - $CURRENT_TITLE      ${time[2]}       ${VOLUME:7}"
 fi
 
 

@@ -1,0 +1,34 @@
+#!/bin/bash
+
+
+getStatus(){
+BAT_R=$(acpi -b | awk "{print substr(\$4,0,length(\$4)-2)}")
+BAT_S=$(acpi -b | awk "{print \$3}")
+}
+
+BAT_MAX=75
+BAT_MIN=25
+
+doService(){
+
+while true ; do
+
+	getStatus	
+
+	if [ $((BAT_R)) -lt $((BAT_MIN)) ] && [ $BAT_S == "Discharging," ]
+	then
+		notify-send -u critical "Battery status" "Battery under $BAT_MIN%. Please plug in adapter"
+	elif [ $((BAT_R)) -gt $((BAT_MAX)) ] && [ $BAT_S == "Charging," ]
+	then
+		notify-send -u critical "Battery status" "Battery above $BAT_MAX%. Please remove adapter"
+	fi
+	sleep 20
+done
+
+}
+
+ACTIVE_SERVICES=$(ps -ef | grep battery-notify | wc -l)
+
+if [ $((ACTIVE_SERVICES)) -lt 5 ] ; then
+	doService
+fi

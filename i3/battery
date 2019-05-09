@@ -1,0 +1,55 @@
+#!/bin/bash
+
+BATTERY_S=$(acpi -b | awk "{print \$3}")
+BATTERY_R=$(acpi -b | awk "{print substr(\$4,0,length(\$4)-2)}")
+BATTERY_T=$(acpi -b | awk "{print \$5}")
+
+if [ $BATTERY_S == "Charging," ]
+then BATTERY_P="  "
+else unset $BATTERY_P
+# else BATTERY_P=" "
+fi
+
+if [ $BATTERY_S == "Full," ]
+then
+				notify-send -u normal "Battery status" "Battery is full"
+fi
+
+if [ $((BATTERY_R)) -eq 100 ]
+then
+				echo "  $BATTERY_R%, $BATTERY_T$BATTERY_P"
+				echo "  $BATTERY_R%, $BATTERY_T$BATTERY_P"
+				echo "#0087ff"
+fi
+
+if [ $((BATTERY_R)) -lt 100 ] && [ $((BATTERY_R)) -gt 80 ] || [ $((BATTERY_R)) -eq 80 ]
+then
+				echo "  $BATTERY_R%, $BATTERY_T$BATTERY_P"
+				echo "  $BATTERY_R%, $BATTERY_T$BATTERY_P"
+				echo "#0087ff"
+fi
+
+if [ $((BATTERY_R)) -lt 80 ] && [ $((BATTERY_R)) -gt 60 ] || [ $((BATTERY_R)) -eq 60 ]
+then
+				echo "  $BATTERY_R%, $BATTERY_T$BATTERY_P"
+				echo "  $BATTERY_R%, $BATTERY_T$BATTERY_P"
+fi
+
+if [ $((BATTERY_R)) -lt 60 ] && [ $((BATTERY_R)) -gt 40 ] || [ $((BATTERY_R)) -eq 40 ]
+then
+				echo "  $BATTERY_R%, $BATTERY_T$BATTERY_P"	
+				echo "  $BATTERY_R%, $BATTERY_T$BATTERY_P"
+fi
+
+if [ $((BATTERY_R)) -lt 40 ] && [ $((BATTERY_R)) -gt 20 ] || [ $((BATTERY_R)) -eq 20 ]
+then
+				echo "  $BATTERY_R%, $BATTERY_T$BATTERY_P"
+				echo "  $BATTERY_R%, $BATTERY_T$BATTERY_P"
+fi
+
+if [ $((BATTERY_R)) -lt 20 ] && [ $((BATTERY_R)) -gt 0 ]
+then
+				echo "  $BATTERY_R%, $BATTERY_T$BATTERY_P"	
+				echo "  $BATTERY_R%, $BATTERY_T$BATTERY_P"
+				echo "#dc322f"
+fi

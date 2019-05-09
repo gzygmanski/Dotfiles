@@ -1,0 +1,16 @@
+#!/bin/bash
+
+WIFI_STATUS=$(awk '{ split(FILENAME, array, "/"); print array[5] ": " $1 }' $(find /sys/class/net/*/operstate ! -type d) | grep wlp1s0 | awk "{print \$2}")
+WIFI_ESSID=$(iwconfig wlp1s0 | grep wlp1s0 | awk {"print \$4"})
+
+if [ $WIFI_STATUS == "up" ] 
+then
+				echo ${WIFI_ESSID:7:-1}
+				echo ${WIFI_ESSID:7:-1}
+				echo "#0087ff"
+else
+				echo $WIFI_STATUS
+				echo $WIFI_STATUS
+				echo "#dc322f"
+fi
+

@@ -16,3 +16,4 @@ volume_change_step = 2
 display_volume_level = yes
 
 user_interface = classic
+autocenter_mode = yes

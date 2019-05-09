@@ -1,23 +1,32 @@
 #!/bin/bash
 
+chrLen=${#WINDOW_INFO}
+maxLen=30
+NEW_WINDOW_INFO=test
+
+
 ACTIVE_WINDOW_ID=$(xprop -root -f _NET_ACTIVE_WINDOW 0x " \$0\\n" _NET_ACTIVE_WINDOW | 
 	awk "{print \$2}")
 WINDOW_INFO=`xprop -id $ACTIVE_WINDOW_ID | 
-	grep WM_NAME\(UTF8_STRING\) | 
+	grep _WM_NAME\(UTF8_STRING\) | 
 	awk -F"= " '{print $2}'`
-
-chrLen=${#WINDOW_INFO}
-maxLen=30
 
 if [ -n "$WINDOW_INFO" ]
 then
-	if [ $(( $chrLen )) -lt $(( $maxLen )) ]
+	if [ "$NEW_WINDOW_INFO" != "$WINDOW_INFO" ]
 	then
-		echo "${WINDOW_INFO:1:-1}"
-	else
-		cutChr=$(( $maxLen-$chrLen ))
-		echo "${WINDOW_INFO:1:$cutChr}..."
+		if [ $(( $chrLen )) -lt $(( $maxLen )) ] 
+		then 
+			echo "${WINDOW_INFO:1:-1}"
+		else
+			cutChr=$(( $maxLen-$chrLen ))
+			echo "${WINDOW_INFO:1:$cutChr}..."
+		fi
+
+		NEW_WINDOW_INFO=$WINDOW_INFO
 	fi
 else
 	echo Nothing
+	NEW_WINDOW_INFO="Nothing"
 fi
+

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+doService(){
+	while true ; do
+		CHECK_DOWNLOADS=$(ls ~/Pobrane | grep .torrent | wc -l)
+		
+		if [ $CHECK_DOWNLOADS -gt 0 ] ; then		
+			mv ~/Pobrane/*.torrent ~/rtorrent/watch/start
+		fi
+		
+		sleep 20
+	done
+}
+
+ACTIVE_SERVICES=$(ps -ef | grep torrent-watch | wc -l)
+
+if [ $((ACTIVE_SERVICES)) -lt 5 ] ; then
+	doService
+fi

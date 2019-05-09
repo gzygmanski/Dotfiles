@@ -1,0 +1,72 @@
+let mapleader =","
+
+syntax enable
+set tabstop=4	" number of visual spaces per TAB
+set softtabstop=4   " number of spaces in tab when editing
+set relativenumber
+set nu rnu
+set cursorline
+set lazyredraw	" redraw only when we need to.
+" set textwidth=80
+set wrap linebreak nolist
+" PLUGINS
+call plug#begin('~/.vim/plugged')
+
+Plug 'https://github.com/LuRsT/austere.vim.git'
+Plug 'junegunn/goyo.vim'
+Plug 'raimondi/delimitmate'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'scrooloose/nerdtree'
+Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+Plug 'w0rp/ale'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
+call plug#end()
+
+colorscheme austere 
+" CUSTOM BINDS
+
+" tex vars
+let g:livepreview_previewer = 'zathura'
+
+" Snippets
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+
+" move vertically by visual line
+nnoremap j gj
+nnoremap k gk
+
+" move to beginning/end of line
+nnoremap B ^
+nnoremap E $
+
+" $/^ doesn't do anything
+nnoremap $ <nop>
+nnoremap ^ <nop>
+
+" distraction-free mode toggle
+nnoremap <F12> :Goyo<CR>
+
+" spell check
+nnoremap <F10> :set spell spelllang=pl<CR>
+nnoremap <F9> :set nospell<CR>
+
+" nerdtree
+map <C-n> :NERDTreeToggle<CR>
+
+
+" Navigating with guides
+inoremap <leader><leader> <Esc>/<++><Enter>"_c4l
+vnoremap <leader><leader> <Esc>/<++><Enter>"_c4l
+map <leader><leader> <Esc>/<++><Enter>"_c4l
+
+"".bib
+autocmd FileType bib inoremap ,a @article{<Enter>author<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>journal<Space>=<Space>{<++>},<Enter>volume<Space>=<Space>{<++>},<Enter>pages<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>8kA,<Esc>i
+autocmd FileType bib inoremap ,b @book{<Enter>author<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>publisher<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>6kA,<Esc>i
+autocmd FileType bib inoremap ,c @incollection{<Enter>author<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>booktitle<Space>=<Space>{<++>},<Enter>editor<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>publisher<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>8kA,<Esc>i
+autocmd FileType bib inoremap ,w @misc{<Enter>howpublished<Space>=<Space>{\url{<++>}},<Enter>author<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>month<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>note<Space>=<Space>{Dostęp:<Space><++>},<Enter>}<Enter><++><Esc>8kA,<Esc>i

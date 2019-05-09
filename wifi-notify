@@ -1,0 +1,37 @@
+#!/bin/bash
+
+FLAG=0
+ACTIVE_SERVICES=$(ps -ef | grep wifi-notify | wc -l)
+
+
+getStatus() {
+
+	WIFI_S=$(awk '{ split(FILENAME, array, "/"); print array[5] ": " $1 }' $(find /sys/class/net/*/operstate ! -type d) | grep wlp1s0 | awk "{print \$2}")
+	WIFI_ESSID=$(iwconfig wlp1s0 | grep wlp1s0 | awk {"print \$4"})
+
+}
+
+doService() {
+
+  while true ; do
+		getStatus
+    if [ $WIFI_S == "up" ] && [ $((FLAG)) -eq 1 ] ; then
+      notify-send -u normal "Connection status: $WIFI_S" "Connected to ${WIFI_ESSID:7:-1}"
+      FLAG=0
+    elif [ $WIFI_S == "down" ] && [ $((FLAG)) -eq 0 ] ; then
+      notify-send -u critical "Connection status: $WIFI_S" "Press mod+Shift+n to open Network manager"
+      FLAG=1
+    fi
+
+		sleep 20
+
+	done
+	
+}
+
+
+if [ $ACTIVE_SERVICES -lt 5 ] ; then
+	doService
+fi
+
+
